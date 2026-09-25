@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Lager</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <ul id="gruppen"></ul>
+  <div id="ebene1" class="screen">
+    <div id="gruppen-grid" class="gruppen-grid"></div>
+  </div>
+  <div id="ebene2" class="screen hidden">
+    <button id="zurueck" class="zurueck">← Zurueck</button>
+    <h2 id="ebene2-titel"></h2>
+    <div id="regale"></div>
+  </div>
   <script type="module" src="controller/app.js"></script>
 </body>
 </html>
