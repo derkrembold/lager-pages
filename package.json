@@ -1,0 +1,10 @@
+{
+  "name": "lager-pages",
+  "private": true,
+  "scripts": {
+    "test": "node tests/visuell/test_grundgeruest.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
