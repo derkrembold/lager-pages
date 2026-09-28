@@ -179,14 +179,11 @@ h2 {
    Mindestbreite ihres Textes (gleiche Fehlerklasse wie #5, nur diesmal hier). Statt die Kacheln
    bis zur Unlesbarkeit zu quetschen (User-Vorgabe): eine Mindestbreite je Kachel, und wenn eine
    Zeile dafuer nicht reicht, bricht der Ueberschuss automatisch in eine neue Zeile darunter um -
-   normale, "passende" Gruppen sehen dadurch optisch unveraendert aus. */
-/* flex-wrap (Issue #7): bei vielen/langen Storage-Namen in einer side-by-side-Gruppe (z. B.
-   "Raeder") passte nicht mehr alles in eine Zeile - .storage-tile hatte `flex: 1` ohne eigene
-   Mindestbreite, Flex-Items schrumpfen aber standardmaessig nicht unter die Content-
-   Mindestbreite ihres Textes (gleiche Fehlerklasse wie #5, nur diesmal hier). Statt die Kacheln
-   bis zur Unlesbarkeit zu quetschen (User-Vorgabe): eine Mindestbreite je Kachel, und wenn eine
-   Zeile dafuer nicht reicht, bricht der Ueberschuss automatisch in eine neue Zeile darunter um -
-   normale, "passende" Gruppen sehen dadurch optisch unveraendert aus. */
+   normale, "passende" Gruppen sehen dadurch optisch unveraendert aus.
+   80px als Mindestbreite (NICHT 120px, erster Versuch - siehe test_overflow_ebene2.js): gegen die
+   echten Gruppen "Schrank 3" (3 kurze Namen, MUSS einzeilig bleiben) und "Raeder" (4 laengere
+   Namen, darf nur bei echtem Platzmangel umbrechen) bei 320/375/414px durchgetestet - 120px brach
+   "Schrank 3" unnoetig um (User-Fund 2026-09-28), 80px erfuellt beide Faelle ueberall. */
 .regale-row {
   display: flex;
   flex-direction: row;
@@ -201,13 +198,13 @@ h2 {
   align-items: center;
   justify-content: center;
   min-height: 60px;
-  flex: 1 1 120px;
-  min-width: 120px;
+  flex: 1 1 80px;
+  min-width: 80px;
   padding: 6px;
   text-align: center;
   overflow-wrap: break-word;
 }
 
 .storage-gap {
-  flex: 1 1 120px;
+  flex: 1 1 80px;
 }

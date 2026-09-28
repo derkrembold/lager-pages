@@ -65,11 +65,58 @@ const PATHOLOGISCHE_GRUPPE = {
   ]
 };
 
+// Regressionstest gegen die echten Gruppen "Schrank 3" (3 Storages, kurze Namen) und "Raeder" (4
+// Storages, laengere Namen) - konkret der vom User gemeldete Fall (2026-09-28): der urspruengliche
+// min-width-Wert (120px) war zu grosszuegig und brach auch "Schrank 3" unnoetig um, obwohl das
+// vorher (vor #7) problemlos in eine Zeile passte. Die Regel ist "wenn moeglich eine Zeile, nur
+// bei echtem Platzmangel umbrechen" - "Schrank 3" MUSS also immer einzeilig bleiben, "Raeder" darf
+// (je nach Breite) umbrechen, darf aber NIE ueberlaufen.
+async function pruefeEchteGruppen(port, browser) {
+  for (const vw of [320, 375, 414]) {
+    const page = await browser.newPage({ viewport: { width: vw, height: 600 } });
+    await page.goto(`http://localhost:${port}/`);
+    await page.waitForSelector('.group-tile');
+
+    await pruefe(`"Schrank 3" bleibt bei ${vw}px Breite einzeilig`, async () => {
+      await page.click('.group-tile:has-text("Schrank 3")');
+      await page.waitForSelector('#ebene2:not(.hidden)');
+      const zeilenAnzahl = await page.evaluate(() =>
+        new Set([...document.querySelectorAll('.storage-tile')].map((t) => Math.round(t.getBoundingClientRect().top))).size
+      );
+      if (zeilenAnzahl !== 1) {
+        throw new Error(`erwarte 1 Zeile fuer "Schrank 3" (3 kurze Namen passen), gefunden: ${zeilenAnzahl}`);
+      }
+      await page.click('#back');
+      await page.waitForSelector('#ebene1:not(.hidden)');
+    });
+
+    await pruefe(`"Raeder" ragt bei ${vw}px Breite nie ueber den Viewport hinaus`, async () => {
+      await page.click('.group-tile:has-text("Raeder")');
+      await page.waitForSelector('#ebene2:not(.hidden)');
+      const ueberstand = await page.evaluate(() => {
+        const viewportBreite = window.innerWidth;
+        return [...document.querySelectorAll('.storage-tile')]
+          .map((t) => t.getBoundingClientRect().right)
+          .filter((rechts) => rechts > viewportBreite + 0.5);
+      });
+      if (ueberstand.length > 0) {
+        throw new Error(`"Raeder"-Kacheln ragen bei ${vw}px raus: ${JSON.stringify(ueberstand)}`);
+      }
+      await page.click('#back');
+      await page.waitForSelector('#ebene1:not(.hidden)');
+    });
+
+    await page.close();
+  }
+}
+
 (async () => {
   const server = await starteServer();
   const port = server.address().port;
   const browser = await chromium.launch();
   try {
+    await pruefeEchteGruppen(port, browser);
+
     const page = await browser.newPage({ viewport: { width: 320, height: 800 } });
     await page.goto(`http://localhost:${port}/`);
     await page.waitForSelector('.group-tile');
