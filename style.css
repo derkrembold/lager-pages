@@ -26,16 +26,47 @@ body {
   display: none;
 }
 
-/* Umschliessende Box (Issue #5, User-Vorgabe): alle Ebenen liegen innerhalb einer sichtbar
-   abgesetzten Box, nach dem Vorbild der Kommandozeile in lager tui (Textuals Input-Widget -
-   `background: $surface` auf dem dunkleren `$background` des Screens, siehe _input.py). Begrenzt
-   nebenbei zuverlaessig die Breite, damit einzelne Kacheln nie ueber den Rand hinausragen koennen
-   (siehe .group-tile min-width: 0 weiter unten fuer die eigentliche Ursache). */
+/* Umschliessende "Fenster"-Box (Issue #5, User-Vorgabe 2026-09-28, siehe pics/Shell.svg): sieht
+   aus wie ein Terminal-/Browser-Fenster - graue Titelleiste mit einem Tab ("Lager-Pages" + rein
+   dekoratives "+"), der eigentliche Inhalt (alle Ebenen) liegt darunter. Begrenzt nebenbei
+   zuverlaessig die Breite, damit einzelne Kacheln nie ueber den Rand hinausragen koennen (siehe
+   .group-tile min-width: 0 weiter unten fuer die eigentliche Ursache). */
 #app-box {
   max-width: 480px;
   margin: 0 auto;
-  border: 2px solid var(--primary);
-  background: var(--surface);
+  background: #000000;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.titlebar {
+  background: #666666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+}
+
+.tab {
+  background: #000000;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.tab-plus {
+  color: #ffffff;
+}
+
+/* Bewusst leerer Platzhalter (User-Vorgabe): Raum fuer kuenftige Menuepunkte unter der
+   Titelleiste - lager-pages ist bisher rein lesend (kein Menue, siehe Konzept.md Abschnitt 7),
+   dieser Platz ist also aktuell ungenutzt, aber absichtlich freigehalten. */
+.menu-reserviert {
+  height: 28px;
+}
+
+#inhalt {
   padding: 12px;
 }
 

@@ -8,13 +8,20 @@
 </head>
 <body>
   <div id="app-box">
-    <div id="ebene1" class="screen">
-      <div id="gruppen-grid" class="gruppen-grid"></div>
+    <div class="titlebar">
+      <div class="tab">Lager-Pages</div>
+      <span class="tab-plus">+</span>
     </div>
-    <div id="ebene2" class="screen hidden">
-      <button id="zurueck" class="zurueck">← Zurueck</button>
-      <h2 id="ebene2-titel"></h2>
-      <div id="regale"></div>
+    <div class="menu-reserviert"></div>
+    <div id="inhalt">
+      <div id="ebene1" class="screen">
+        <div id="gruppen-grid" class="gruppen-grid"></div>
+      </div>
+      <div id="ebene2" class="screen hidden">
+        <button id="zurueck" class="zurueck">← Zurueck</button>
+        <h2 id="ebene2-titel"></h2>
+        <div id="regale"></div>
+      </div>
     </div>
   </div>
   <script type="module" src="controller/app.js"></script>
