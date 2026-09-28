@@ -173,9 +173,24 @@ h2 {
   gap: 8px;
 }
 
+/* flex-wrap (Issue #7): bei vielen/langen Storage-Namen in einer side-by-side-Gruppe (z. B.
+   "Raeder") passte nicht mehr alles in eine Zeile - .storage-tile hatte `flex: 1` ohne eigene
+   Mindestbreite, Flex-Items schrumpfen aber standardmaessig nicht unter die Content-
+   Mindestbreite ihres Textes (gleiche Fehlerklasse wie #5, nur diesmal hier). Statt die Kacheln
+   bis zur Unlesbarkeit zu quetschen (User-Vorgabe): eine Mindestbreite je Kachel, und wenn eine
+   Zeile dafuer nicht reicht, bricht der Ueberschuss automatisch in eine neue Zeile darunter um -
+   normale, "passende" Gruppen sehen dadurch optisch unveraendert aus. */
+/* flex-wrap (Issue #7): bei vielen/langen Storage-Namen in einer side-by-side-Gruppe (z. B.
+   "Raeder") passte nicht mehr alles in eine Zeile - .storage-tile hatte `flex: 1` ohne eigene
+   Mindestbreite, Flex-Items schrumpfen aber standardmaessig nicht unter die Content-
+   Mindestbreite ihres Textes (gleiche Fehlerklasse wie #5, nur diesmal hier). Statt die Kacheln
+   bis zur Unlesbarkeit zu quetschen (User-Vorgabe): eine Mindestbreite je Kachel, und wenn eine
+   Zeile dafuer nicht reicht, bricht der Ueberschuss automatisch in eine neue Zeile darunter um -
+   normale, "passende" Gruppen sehen dadurch optisch unveraendert aus. */
 .regale-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -186,11 +201,13 @@ h2 {
   align-items: center;
   justify-content: center;
   min-height: 60px;
-  flex: 1;
+  flex: 1 1 120px;
+  min-width: 120px;
   padding: 6px;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 .storage-gap {
-  flex: 1;
+  flex: 1 1 120px;
 }
