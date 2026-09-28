@@ -2,7 +2,7 @@
   "name": "lager-pages",
   "private": true,
   "scripts": {
-    "test": "node tests/visuell/test_grundgeruest.js && node tests/visuell/test_navigation.js"
+    "test": "node tests/visuell/test_grundgeruest.js && node tests/visuell/test_navigation.js && node tests/visuell/test_overflow.js"
   },
   "devDependencies": {
     "playwright": "^1.61.1"

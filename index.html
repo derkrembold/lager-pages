@@ -2,17 +2,20 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lager</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="ebene1" class="screen">
-    <div id="gruppen-grid" class="gruppen-grid"></div>
-  </div>
-  <div id="ebene2" class="screen hidden">
-    <button id="zurueck" class="zurueck">← Zurueck</button>
-    <h2 id="ebene2-titel"></h2>
-    <div id="regale"></div>
+  <div id="app-box">
+    <div id="ebene1" class="screen">
+      <div id="gruppen-grid" class="gruppen-grid"></div>
+    </div>
+    <div id="ebene2" class="screen hidden">
+      <button id="zurueck" class="zurueck">← Zurueck</button>
+      <h2 id="ebene2-titel"></h2>
+      <div id="regale"></div>
+    </div>
   </div>
   <script type="module" src="controller/app.js"></script>
 </body>
