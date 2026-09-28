@@ -60,13 +60,6 @@ body {
   color: #ffffff;
 }
 
-/* Bewusst leerer Platzhalter (User-Vorgabe): Raum fuer kuenftige Menuepunkte unter der
-   Titelleiste - lager-pages ist bisher rein lesend (kein Menue, siehe Konzept.md Abschnitt 7),
-   dieser Platz ist also aktuell ungenutzt, aber absichtlich freigehalten. */
-.menu-reserviert {
-  height: 28px;
-}
-
 #inhalt {
   padding: 12px;
 }
