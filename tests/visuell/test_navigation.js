@@ -1,5 +1,5 @@
 // Navigations-Test (lager-pages#2): Antippen einer Gruppen-Kachel wechselt zu Ebene 2 (Regale
-// dieser Group), "Zurueck" wechselt wieder zurueck. Nutzt bewusst die Gruppe "Gang" - die hat in
+// dieser Group), "Back" wechselt wieder zurueck. Nutzt bewusst die Gruppe "Gang" - die hat in
 // storage_layout.json eine echte Luecke (null-Eintrag), deckt also auch das Luecken-Rendering ab,
 // nicht nur den einfachen Fall. Aufruf: node tests/visuell/test_navigation.js
 
@@ -88,12 +88,12 @@ async function pruefe(name, fn) {
       }
     });
 
-    await page.click('#zurueck');
+    await page.click('#back');
     await page.waitForSelector('#ebene1:not(.hidden)');
 
-    await pruefe('"Zurueck" wechselt wieder zu Ebene 1', async () => {
+    await pruefe('"Back" wechselt wieder zu Ebene 1', async () => {
       const ebene2Versteckt = await page.$eval('#ebene2', (el) => el.classList.contains('hidden'));
-      if (!ebene2Versteckt) throw new Error('#ebene2 sollte nach "Zurueck" wieder "hidden" sein');
+      if (!ebene2Versteckt) throw new Error('#ebene2 sollte nach "Back" wieder "hidden" sein');
     });
   } finally {
     await browser.close();

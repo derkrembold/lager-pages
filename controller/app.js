@@ -16,4 +16,4 @@ function oeffneGruppe(gruppe) {
 }
 
 zeigeGruppen(daten.groups, document.getElementById("gruppen-grid"), oeffneGruppe);
-document.getElementById("zurueck").addEventListener("click", () => zeigeEbene("ebene1"));
+document.getElementById("back").addEventListener("click", () => zeigeEbene("ebene1"));

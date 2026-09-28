@@ -75,18 +75,31 @@ h2 {
   margin: 0 0 12px;
 }
 
-.zurueck {
-  background: var(--surface);
-  color: var(--fg);
-  border: 2px solid var(--primary);
-  padding: 6px 12px;
+/* Menue-Buttons (Issue #6): Look wie MenuButton in lager tui (Textuals Standard-Button-Stil -
+   randlos/flach im Ruhezustand, Rahmen erscheint erst bei Interaktion). Auf Touch gibt es keinen
+   echten Hover, daher Rahmen nur im :active-Tap-Moment, in der Titelleisten-Grau statt Primary-
+   Blau (User-Vorgabe, damit es sich vom blauen Kachel-Rahmen abhebt). Dezenter dunkelgrauer
+   Hintergrund im Ruhezustand statt komplett unsichtbar, damit die Buttons trotzdem als klickbar
+   erkennbar sind. "Find" ist bewusst nur ein gleich gestylter Platzhalter ohne Funktion - die
+   kommt erst mit lager-pages#4. */
+.menu-bar {
+  display: flex;
+  gap: 8px;
   margin-bottom: 12px;
+}
+
+.menu-button {
+  background: #2a2a2a;
+  color: var(--fg);
+  border: 2px solid transparent;
+  padding: 6px 12px;
   font: inherit;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.zurueck:active {
-  background: rgba(255, 166, 43, 0.3); /* $accent 30%, wie GroupTile:focus im TUI */
+.menu-button:active {
+  border-color: #666666;
 }
 
 /* Ebene 1: Raster mit 6 Spuren, damit "narrow" (stacked-Gruppen, halbe Breite/doppelte Hoehe)
