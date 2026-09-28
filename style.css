@@ -202,7 +202,24 @@ h2 {
   min-width: 80px;
   padding: 6px;
   text-align: center;
+}
+
+/* Lange, einzelne Woerter (z. B. "Kondensatoren") mit Bindestrich umbrechen statt abzuschneiden
+   (User-Vorgabe 2026-09-28: Abschneiden mit "..." machte gleichnamige Kacheln ununterscheidbar) -
+   die Kachel WAECHST dafuer nach unten (min-height ist nur eine Untergrenze, kein Maximum), .
+   `hyphens: auto` braucht `lang="de"` auf <html> (schon vorhanden) fuer die deutsche
+   Trennungsregeln; `overflow-wrap: break-word` ist der Fallback, falls ein Browser `hyphens`
+   nicht unterstuetzt - bricht dann ohne Bindestrich, aber immer noch innerhalb der Kachel.
+   `.regale-row` setzt kein eigenes align-items, Flexbox stretcht die Kacheln einer Zeile also
+   automatisch alle auf die Hoehe der (durch den Umbruch) hoechsten Kachel. min-width: 0 noetig,
+   damit der Span als Flex-Kind ueberhaupt auf die Kachelbreite schrumpfen darf. */
+.storage-tile-label {
+  display: block;
+  width: 100%;
+  min-width: 0;
   overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .storage-gap {

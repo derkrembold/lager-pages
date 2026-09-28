@@ -15,8 +15,11 @@ export function zeigeRegale(gruppe, container) {
     }
     const kachel = document.createElement("div");
     kachel.className = "storage-tile";
-    kachel.textContent = storage.name;
     kachel.dataset.storageId = storage.id;
+    const label = document.createElement("span");
+    label.className = "storage-tile-label";
+    label.textContent = storage.name;
+    kachel.appendChild(label);
     container.appendChild(kachel);
   }
 }
