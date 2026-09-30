@@ -15,14 +15,14 @@
     <div id="inhalt">
       <div id="ebene1" class="screen">
         <div class="menu-bar">
-          <button class="menu-button">Find</button>
+          <button class="menu-button find-button">Find</button>
         </div>
         <div id="gruppen-grid" class="gruppen-grid"></div>
       </div>
       <div id="ebene2" class="screen hidden">
         <div class="menu-bar">
           <button id="back" class="menu-button" data-back="ebene1">Back</button>
-          <button id="find-placeholder" class="menu-button">Find</button>
+          <button class="menu-button find-button">Find</button>
         </div>
         <h2 id="ebene2-titel"></h2>
         <div id="regale"></div>
@@ -30,7 +30,7 @@
       <div id="ebene3" class="screen hidden">
         <div class="menu-bar">
           <button class="menu-button" data-back="ebene2">Back</button>
-          <button class="menu-button">Find</button>
+          <button class="menu-button find-button">Find</button>
         </div>
         <h2 id="ebene3-titel"></h2>
         <div id="faecher"></div>
@@ -38,10 +38,21 @@
       <div id="ebene4" class="screen hidden">
         <div class="menu-bar">
           <button class="menu-button" data-back="ebene3">Back</button>
-          <button class="menu-button">Find</button>
+          <button class="menu-button find-button">Find</button>
         </div>
         <h2 id="ebene4-titel"></h2>
         <div id="items"></div>
+      </div>
+      <div id="find" class="screen hidden">
+        <div class="menu-bar">
+          <button id="find-back" class="menu-button">Back</button>
+        </div>
+        <h2>Find</h2>
+        <form id="find-form">
+          <input type="text" id="find-input" placeholder="Search term">
+          <button type="submit" class="menu-button">Search</button>
+        </form>
+        <div id="find-results"></div>
       </div>
     </div>
   </div>

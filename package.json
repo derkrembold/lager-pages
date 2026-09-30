@@ -2,7 +2,7 @@
   "name": "lager-pages",
   "private": true,
   "scripts": {
-    "test": "node tests/visuell/test_grundgeruest.js && node tests/visuell/test_navigation.js && node tests/visuell/test_overflow.js && node tests/visuell/test_overflow_ebene2.js && node tests/visuell/test_ebene3_4.js && node tests/visuell/test_overflow_ebene3.js"
+    "test": "node tests/visuell/test_grundgeruest.js && node tests/visuell/test_navigation.js && node tests/visuell/test_overflow.js && node tests/visuell/test_overflow_ebene2.js && node tests/visuell/test_ebene3_4.js && node tests/visuell/test_overflow_ebene3.js && node tests/visuell/test_suche.js && node tests/visuell/test_find.js"
   },
   "devDependencies": {
     "playwright": "^1.61.1"
