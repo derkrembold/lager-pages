@@ -2,8 +2,8 @@
 // tui.py): bei "stacked" untereinander (volle Breite je Regal), bei "side-by-side" nebeneinander
 // (gleich breit). `null`-Eintraege in gruppe.storages sind bewusste Luecken (siehe
 // storage_layout.json) und werden als leerer Platzhalter ohne Rahmen dargestellt. Antippen einer
-// Regal-Kachel navigiert erst ab lager-pages#3 weiter (Ebene 3).
-export function zeigeRegale(gruppe, container) {
+// Regal-Kachel wechselt zu Ebene 3 (lager-pages#3).
+export function zeigeRegale(gruppe, container, onSelect) {
   container.innerHTML = "";
   container.className = gruppe.arrangement === "stacked" ? "regale-stack" : "regale-row";
   for (const storage of gruppe.storages) {
@@ -20,6 +20,7 @@ export function zeigeRegale(gruppe, container) {
     label.className = "storage-tile-label";
     label.textContent = storage.name;
     kachel.appendChild(label);
+    kachel.addEventListener("click", () => onSelect(storage));
     container.appendChild(kachel);
   }
 }

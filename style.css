@@ -225,3 +225,61 @@ h2 {
 .storage-gap {
   flex: 1 1 80px;
 }
+
+/* Ebene 3: Reihen ABSTEIGEND gerendert (siehe view/faecher.js), jede Reihe eine eigene Zeile
+   gleich breiter Fach-Kacheln - wie CompartmentsScreen im TUI. Kein flex-wrap hier (anders als
+   .regale-row): eine Reihe ist eine physische Regal-Reihe, Zellen duerfen nicht in eine andere
+   Reihe "abwandern". Stattdessen wie .storage-tile: min-width: 0 + Bindestrich-Umbruch, die
+   Zelle waechst bei mehreren/langen Eintraegen nach unten statt zu ueberlaufen. */
+.faecher-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faecher-row {
+  display: flex;
+  gap: 8px;
+}
+
+.faecher-zelle {
+  border: 2px solid var(--primary);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  flex: 1;
+  min-width: 0;
+  padding: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.faecher-zelle-label {
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Ebene 4: schmaler, gestapelter Kaesten-Turm wie ItemDetailScreen im TUI (dort feste
+   TOTAL_WIDTH < Bildschirmbreite, mittig zentriert - "wie eine Schublade"). Hier responsiv per
+   max-width statt fester Pixelbreite, da lager-pages auf sehr unterschiedlichen Handy-Breiten
+   laufen muss. */
+.item-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.item-box {
+  border: 2px solid var(--primary);
+  background: var(--surface);
+  padding: 10px;
+  text-align: center;
+}
