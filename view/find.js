@@ -1,12 +1,12 @@
-// Ergebnisliste fuer Find (lager-pages#4, Schritt 1) - gleiche Formatierung wie `lager search`
-// im CLI (cli.py format_location()): "Group: X, Storage: Y, Row: Z, Column: W". Noch keine
-// Navigation zum Fundort (kommt mit Schritt 2) - nur Anzeige.
+// Ergebnisliste fuer Find (lager-pages#4) - gleiche Formatierung wie `lager search` im CLI
+// (cli.py format_location()): "Group: X, Storage: Y, Row: Z, Column: W". Antippen eines Treffers
+// springt zum Fundort (Ebene 3, dort hervorgehoben) - siehe controller/app.js springeZumFundort().
 function formatStandort(item) {
   const group = item.group_name !== null ? item.group_name : "-";
   return `Group: ${group}, Storage: ${item.storage_name}, Row: ${item.row}, Column: ${item.column}`;
 }
 
-export function zeigeSuchergebnisse(ergebnisse, container) {
+export function zeigeSuchergebnisse(ergebnisse, container, onSelect) {
   container.innerHTML = "";
   if (ergebnisse.length === 0) {
     const hinweis = document.createElement("div");
@@ -29,6 +29,7 @@ export function zeigeSuchergebnisse(ergebnisse, container) {
     standort.textContent = formatStandort(item);
     zeile.appendChild(standort);
 
+    zeile.addEventListener("click", () => onSelect(item));
     container.appendChild(zeile);
   }
 }

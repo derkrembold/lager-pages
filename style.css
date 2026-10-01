@@ -257,6 +257,12 @@ h2 {
   cursor: pointer;
 }
 
+/* Per Find angesprungenes Fach (lager-pages#4, Schritt 2) - "heavy red"-Rahmen wie
+   CompartmentsScreen.search-highlight im TUI. */
+.faecher-zelle.search-highlight {
+  border: 3px solid #e02020;
+}
+
 .faecher-zelle-label {
   width: 100%;
   min-width: 0;

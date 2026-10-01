@@ -48,6 +48,25 @@ function oeffneFind() {
   document.getElementById("find-input").focus();
 }
 
+// Sprung zum Fundort (lager-pages#4, Schritt 2) - wie FindItemScreen.select_result im TUI:
+// Ebene 2 wird mit aufgebaut (damit "Back" von Ebene 3 zu einer echten, gefuellten Ebene 2 fuehrt,
+// kein reiner Anzeige-Shortcut), dann Ebene 3 mit rot hervorgehobenem Fach. Ein Storage ohne
+// Group (group_id null) hat laut TUI-Kommentar aktuell kein echtes Item (defensiv abgefangen,
+// gleiches Prinzip wie dort: dann direkt ohne Ebene 2).
+function springeZumFundort(item) {
+  const gruppe = item.group_id !== null ? daten.groups.find((g) => g.id === item.group_id) : null;
+  if (gruppe) {
+    document.getElementById("ebene2-titel").textContent = gruppe.name;
+    zeigeRegale(gruppe, document.getElementById("regale"), oeffneStorage);
+  }
+  const storage = gruppe
+    ? gruppe.storages.find((s) => s && s.id === item.storage_id)
+    : { id: item.storage_id, name: item.storage_name, rows: [] };
+  document.getElementById("ebene3-titel").textContent = storage.name;
+  zeigeFaecher(storage, document.getElementById("faecher"), oeffneFach, item.compartment_id);
+  zeigeEbene("ebene3");
+}
+
 zeigeGruppen(daten.groups, document.getElementById("gruppen-grid"), oeffneGruppe);
 
 // Ein Back-Button je Ebene (siehe index.html, `data-back` traegt das Ziel) - gemeinsame
@@ -69,5 +88,5 @@ document.getElementById("find-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const query = document.getElementById("find-input").value.trim();
   const ergebnisse = query ? sucheItems(daten.items, query) : [];
-  zeigeSuchergebnisse(ergebnisse, document.getElementById("find-results"));
+  zeigeSuchergebnisse(ergebnisse, document.getElementById("find-results"), springeZumFundort);
 });
